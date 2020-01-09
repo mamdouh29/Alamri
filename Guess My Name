@@ -1,0 +1,13 @@
+my_name = 'alamri'
+guess_count=3
+x = input('Guess my name: ')
+while guess_count > 1:
+    if x == my_name:
+        print('Good Guessing ', x,'is my name') 
+        break
+    elif x != my_name:
+        print('Guess again ', x, ' isn\'t my name',)
+        guess_count -= 1
+    x = input('Guess my name: ')
+else:
+    print(" You are out of gusseing")
