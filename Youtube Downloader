@@ -1,0 +1,52 @@
+import pafy
+import os
+import glob
+from pydub import AudioSegment
+
+url = input('Yotube url or Video id: ')
+api_key = 'AIzaSyDEotbQZBPjks0yrAxrEzkFOzff9iJHIVg'
+
+
+class Video:
+    def __init__(self):
+        self.vid = pafy.new(url)
+
+    def video(self, name, quality, hi_quality):
+        name = self.vid.title
+        quality = self.vid.videostreams
+        hi_quality = self.vid.getbestvideo()
+        for i, q in enumerate(quality):
+            print(f'{i} >> quality ={q} ')
+
+
+class Audio:
+    def __init__(self):
+        self.audio = pafy.new(url)
+
+    def audio(self, name, quality, hi_quality):
+        name = self.audio.title
+        quality = self.audio.audiostreams
+        hi_quality = self.audio.getbestaudio()
+        for i, q in enumerate(quality):
+            print(f'{i} >> quality ={q} ')
+
+    def converter(self):
+        video_dir = '/home/alamri/PycharmProjects/student/'
+        extension_list = ('*.m4a', '*.webm')
+
+        os.chdir(video_dir)
+        for extension in extension_list:
+            for video in glob.glob(extension):
+                mp3_filename = os.path.splitext(os.path.basename(video))[0] + '.mp3'
+                AudioSegment.from_file(video).export(mp3_filename, format='mp3')
+
+
+# v=pafy.new(url)
+# vs=v.audiostreams
+# detail=v.getbestvideo()
+# print(detail.download(quiet=False))
+#
+#
+# mp3=Audio()
+# mp3.converter
+# print(mp3())
